@@ -20,13 +20,14 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { BrowserRouter, Route, NavLink } from 'react-router-dom';
+import CustomizedTimeline from './timeline';
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
       <Link color="inherit" href="/about/">
-        FooStack.Ai
+        evolve.foostack.ai
       </Link>{' '}
       {new Date().getFullYear()}
       {'. Built with '}
@@ -112,77 +113,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const galleryInfo = [
-  {
-    heading: 'Diamond Pricing',
-    text: 'Price your diamond on the 4Cs and more (React, Express, Mongo, Victory, Azure Machine Learning) - Live!',
-    imageLink: 'https://source.unsplash.com/random?3',
-    viewLink: 'http://diamonds.foostack.ai',
-  },
-  {
-    heading: 'NLP Sentiment Aggregator (Dev)',
-    text: 'Flutter App & Backend Azuresentiment analyzer (Flutter, Azure) - In Development !',
-    imageLink: 'https://source.unsplash.com/random?5',
-    viewLink: 'http://foostack.ai/nlp/',
-  },
-  {
-    heading: 'Crime Statistics',
-    text: 'Homicide Crime Statistics (Python/Django + Altair) - Live!',
-    imageLink: 'https://source.unsplash.com/random?1',
-    viewLink: 'http://clt-homicide.foostack.ai/chart/',
-  },
-  {
-    heading: 'World Time (Beta)',
-    text: 'Flutter App for Multi-Timezone viewing - Beta Now (Flutter Android App) !',
-    imageLink: 'https://source.unsplash.com/random?4',
-    viewLink: 'https://play.google.com/store/apps/details?id=ai.foostack.worldtime',
-  },
-  {
-    heading: 'NLP Chat (Concept)',
-    text: 'Next Generation Chat App that captures Sentiment Analysis in realtime (Flutter, Firestore, Azure) - Concept Phase !',
-    imageLink: 'https://source.unsplash.com/random?2',
-    viewLink: 'https://medium.com/flutter-community/nlp-chat-on-flutter-azure-676aa4768fbb',
-  },
-  {
-    heading: 'Tokyo COVID19 Stats (Beta)',
-    text: 'Tracker for Tokyo COVID Cases - Hosted on AWS - Beta Now !',
-    imageLink: 'https://source.unsplash.com/random?6',
-    viewLink: 'http://tokyocovid.foostack.org/',
-  },
-]
 
-const stackInfo = [
-  {
-    heading: 'Visualization',
-    text: 'Javascript React + D3.js based Charting (Altair, Dash, Victory)',
-    imageLink: 'https://source.unsplash.com/random?1',
-  },
-  {
-    heading: 'App Server',
-    text: 'Python Django, Express.js, Java Spring on Azure',
-    imageLink: 'https://source.unsplash.com/random?2',
-  },
-  {
-    heading: 'Machine Learning & Analytics',
-    text: 'Scikit-Learn + Deep Learning frameworks (PyTorch, TensorFlow, Spark, AzureML)',
-    imageLink: 'https://source.unsplash.com/random?3',
-  },
-  {
-    heading: 'Data Management',
-    text: 'MySQL, Hadoop, Mongo, Oracle to hosted solutions on Azure (Hadoop/HDFS, Cloud SQL, Snowflake)',
-    imageLink: 'https://source.unsplash.com/random?4',
-  },
-  {
-    heading: 'Hosting',
-    text: 'Cloud hosting on Azure and AWS',
-    imageLink: 'https://source.unsplash.com/random?5',
-  },
-  {
-    heading: 'Integrated CI/CD Env',
-    text: 'Get started with a full Agile & CI/CD environment using Azure Pipelines, DevOps Scrum/Kanban and Docker containers',
-    imageLink: 'https://source.unsplash.com/random?6',
-  },
-]
 
 export default function FooStack() {
   const classes = useStyles();
@@ -208,7 +139,7 @@ export default function FooStack() {
           <ThreeSixtyIcon className={classes.icon} onClick={() => { document.location.href = '/'; }}>
           </ThreeSixtyIcon>
           <Link variant="h6" className={classes.title} color="inherit" href="/">
-            FooStack.Ai
+            evolve.foostack.ai
           </Link>
           <Button color="inherit" onClick={handleClickOpen}>Contact</Button>
         </Toolbar>
@@ -248,7 +179,7 @@ export default function FooStack() {
           <div className={classes.heroContent}>
             <Container maxWidth="md">
               <Typography variant="h4" align="center" color="textPrimary" gutterBottom>
-                FooStack.Ai Origins and History
+                evolve.foostack.ai Origins and History
               </Typography>
               <CardMedia
                   className={classes.media}
@@ -285,101 +216,34 @@ export default function FooStack() {
             </Container>
           </div>
         )} />
-        <Route exact path="/stack" render={() => (
-          <Container className={classes.cardGrid} maxWidth="md">
-            <Typography variant="h5" align="center" color="textSecondary" paragraph>
-            Foo Stack -- current stack of Data Science Technologies.  
-            </Typography>
-            <Grid container spacing={4}>
-              {stackInfo.map(card => (
-                <Grid item key={card} xs={12} sm={6} md={4}>
-                  <Card className={classes.card}>
-                    <CardMedia
-                      className={classes.cardMedia}
-                      image={card.imageLink}
-                    />
-                    <CardContent className={classes.cardContent}>
-                      <Typography gutterBottom variant="h5" component="h2">
-                        {card.heading}
-                      </Typography>
-                      <Typography>
-                        {card.text}
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                </Grid>
-              ))}
-            </Grid>
-          </Container>
-        )} />
         <Route exact path="/" render={() => (
           <main>
             <div className={classes.heroContent}>
-              <Container maxWidth="sm">
+              <Container maxWidth="md">
                 <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-                  FooStack.Ai
+                  evolve.foostack.ai
                 </Typography>
                 <Typography variant="h5" align="center" color="textSecondary" paragraph>
-                  FooStack is a "Full Stack" Data Science showcase++ - weaving together best of breed
-                  technologies at each layer.  GUI/Presentation, Server logic, Machine Learning, Data Prep and Management</Typography>
-                <div className={classes.heroButtons}>
-                  <Grid container spacing={2} justify="center">
-                    <Grid item>
-                      <Button variant="contained" color="primary" component={AdapterLink} to="/stack">
-                        Full Stack Details
-                      </Button>
-                    </Grid>
-                    <Grid item>
-                      <Button variant="outlined" color="primary" component={AdapterLink} to="/about">
-                        About Foo
-                      </Button>
-                    </Grid>
-                  </Grid>
-                </div>
+                 Evolve is a non profit that focuses on helping people become the best they can,
+                 starting with helping them find new career opportunties by way of:  Resume review and advice,
+                 target focus on companies and roles, interview strategy, interview prep and negotiation tips.
+                </Typography>
+
+                <Typography variant="h4" align="center" gutterBottom>
+                    How it works
+                </Typography>
+                <CustomizedTimeline/>
               </Container>
             </div>
-            <Container className={classes.cardGrid} maxWidth="md">
-              {/* End hero unit */}
-              <Grid container spacing={4}>
-                {galleryInfo.map(card => (
-                  <Grid item key={card} xs={12} sm={6} md={4}>
-                    <Card className={classes.card}>
-                      <ButtonBase
-                        className={classes.cardAction}
-                        onClick={e => { document.location.href = card.viewLink}}
-                      >
-                        <CardMedia
-                          className={classes.cardMedia}
-                          image={card.imageLink}
-                        />
-                        <CardContent className={classes.cardContent}>
-                          <Typography gutterBottom variant="h5" component="h2">
-                            {card.heading}
-                          </Typography>
-                          <Typography>
-                            {card.text}
-                          </Typography>
-                        </CardContent>
-                        <CardActions>
-                          <Button size="small" color="primary" href={card.viewLink} >
-                            View
-                          </Button>
-                        </CardActions>
-                      </ButtonBase>
-                    </Card>
-                  </Grid>
-                ))}
-              </Grid>
-            </Container>
           </main>   
         )}/>   
       {/* Footer */}
       <footer className={classes.footer}>
         <Typography variant="h6" align="center" gutterBottom>
-          FooStack Data Science
+        FooStack         
         </Typography>
         <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-          Full stack data science architecture and design
+          FooStack AI, architecture and design
         </Typography>
         <Copyright />
       </footer>
@@ -389,3 +253,4 @@ export default function FooStack() {
 
   );
 }
+
