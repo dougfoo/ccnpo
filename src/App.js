@@ -1,14 +1,11 @@
 import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
-import ButtonBase from '@material-ui/core/ButtonBase';
 import ThreeSixtyIcon from '@material-ui/icons/ThreeSixty';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Grid from '@material-ui/core/Grid';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
@@ -19,8 +16,9 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { BrowserRouter, Route, NavLink } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import CustomizedTimeline from './timeline';
+import Upload from "./Upload";
 
 function Copyright() {
   return (
@@ -120,7 +118,6 @@ export default function FooStack() {
   const [open, setOpen] = React.useState(false);
   const dialogHeader = "Contact Placeholder";
   const dialogBody = "Placeholder for Contact Form w/ Captcha";
-  const AdapterLink = React.forwardRef((props, ref) => <NavLink innerRef={ref} {...props} />);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -234,6 +231,9 @@ export default function FooStack() {
                 </Typography>
                 <CustomizedTimeline/>
               </Container>
+            </div>
+            <div>
+              <Upload />
             </div>
           </main>   
         )}/>   

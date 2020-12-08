@@ -12,7 +12,6 @@ import LaptopMacIcon from '@material-ui/icons/LaptopMac';
 import AcUnitIcon from '@material-ui/icons/AcUnit';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import HotelIcon from '@material-ui/icons/Hotel';
-import RepeatIcon from '@material-ui/icons/Repeat';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
