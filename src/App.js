@@ -25,7 +25,7 @@ function Copyright() {
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
       <Link color="inherit" href="/about/">
-        evolve.foostack.ai
+        foostack.ai
       </Link>{' '}
       {new Date().getFullYear()}
       {'. Built with '}
@@ -136,7 +136,7 @@ export default function FooStack() {
           <ThreeSixtyIcon className={classes.icon} onClick={() => { document.location.href = '/'; }}>
           </ThreeSixtyIcon>
           <Link variant="h6" className={classes.title} color="inherit" href="/">
-            evolve.foostack.ai
+            Foostack.Ai
           </Link>
           <Button color="inherit" onClick={handleClickOpen}>Contact</Button>
         </Toolbar>
@@ -170,77 +170,34 @@ export default function FooStack() {
           </Button>
         </DialogActions>
       </Dialog>
-
-      {/* Hero unit */}
-        <Route exact path="/about" render={() => (
+      <Route exact path="/" render={() => (
+        <main>
           <div className={classes.heroContent}>
             <Container maxWidth="md">
-              <Typography variant="h4" align="center" color="textPrimary" gutterBottom>
-                evolve.foostack.ai Origins and History
+              <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
+                FooStack Résumé AI Service
               </Typography>
-              <CardMedia
-                  className={classes.media}
-                  image='https://live.staticflickr.com/3560/3798751206_726243b057_b.jpg'
-              />
               <Typography variant="h6" align="center" color="textSecondary" paragraph>
-                The word "Foo" has a storied history in computer science from the 50's at MIT and the 70's with origins of C and Unix 
-                (K&apos;R).   Foo and bar are common first variables used -- bit of a tech/geek history and play on words.
+                Resume-AI.foostack is a non profit that helps people optimize their career and job search.  
+                Our cutting edge AI/NLP based system confidentially reviews resumes and offers AI expert 
+                + human expert advice.  Additional human assistance for targeting companies and    
+                roles, providing interview strategy, prep and negotiation tips also available.
               </Typography>
-              <Typography variant="h6" align="center" color="textSecondary" paragraph>              
-                 This site is to document exploration of a "full stack" data science platform mixing tech like React/JS,
-                 backend in Java/Python/C++, SQL and NoSQL databases, Machine Learning Models,
-                 using best practice Agile &apos; DevOps CI/CD Pipelines.
+
+              <Typography variant="h4" align="center" gutterBottom>
+                  How it works
               </Typography>
-              <Card className={classes.card2} >
-                <CardMedia
-                    className={classes.media2}
-                    image='https://lh3.googleusercontent.com/-US0eQeXNjRU/AAAAAAAAAAI/AAAAAAAAAAA/fiUEyuIc0us/photo.jpg?sz=328'
-                />
-                <div className={classes.details}>
-                  <CardContent className={classes.content}>
-                    <Typography align="center" variant="h6" component="h6">
-                      About Doug Foo
-                    </Typography>
-                    <Typography variant="body2" align="center" color="textSecondary" paragraph>              
-                      Doug started coding in Jr High on the Apple II and TRS 80, writing his first adventure games.
-                      Since then he has been a DevOps engineer (before they called it DevOps), DBA and designer,
-                      Software developer, System architect, Data Scientist (Financial Quant), Development and Program manager, and a Sr Executive.
-                      Doug prides himself with being able to develop across a full stack of technologies.  Check out his articles on <a href="https://medium.com/@doug.foo">medium.com</a>
-                    </Typography>
-                  </CardContent>
-                </div>
-              </Card>
+              <CustomizedTimeline/>
             </Container>
           </div>
-        )} />
-        <Route exact path="/" render={() => (
-          <main>
-            <div className={classes.heroContent}>
-              <Container maxWidth="md">
-                <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-                  evolve.foostack.ai
-                </Typography>
-                <Typography variant="h6" align="center" color="textSecondary" paragraph>
-                 Evolve is a non profit that focuses on helping people improve their career and job search.  
-                 Our cutting edge system confidentially reviews resumes and offers AI expert 
-                 + human expert advice, followed by human assistance to targeting   
-                 roles, and provide interview strategy, prep and negotiation tips.
-                </Typography>
-
-                <Typography variant="h4" align="center" gutterBottom>
-                    How it works
-                </Typography>
-                <CustomizedTimeline/>
-              </Container>
-            </div>
-            <div>
-              <Typography variant="h4" align="center" gutterBottom>
-                  Get Started !
-              </Typography>
-              <Upload />
-            </div>
-          </main>   
-        )}/>   
+          <div>
+            <Typography variant="h4" align="center" gutterBottom>
+                Get Started !
+            </Typography>
+            <Upload />
+          </div>
+        </main>   
+      )}/>   
       {/* Footer */}
       <footer className={classes.footer}>
         <Typography variant="h6" align="center" gutterBottom>
