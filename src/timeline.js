@@ -46,7 +46,7 @@ export default function CustomizedTimeline() {
             <Typography variant="h6" component="h1">
               Upload Resume
             </Typography>
-            <Typography>Show us what you have (don't be perfect)</Typography>
+            <Typography>Show us what you have (send what you have immediately)</Typography>
           </Paper>
         </TimelineContent>
       </TimelineItem>
@@ -88,14 +88,14 @@ export default function CustomizedTimeline() {
             <Typography variant="h6" component="h1">
               Recommendations
             </Typography>
-            <Typography>AI Expert recommendations based on 4 dimensions of your resume</Typography>
+            <Typography>AI Expert recommendations based on 12 dimensions of your resume</Typography>
           </Paper>
         </TimelineContent>
       </TimelineItem>
       <TimelineItem>
         <TimelineOppositeContent>
           <Typography variant="body2" color="textSecondary">
-            Schedule
+            Schedule via Zoom with a human
           </Typography>
         </TimelineOppositeContent>
         <TimelineSeparator>
@@ -109,7 +109,7 @@ export default function CustomizedTimeline() {
             <Typography variant="h6" component="h1">
               Human Expert
             </Typography>
-            <Typography>Real world human expert combines knowledge + AI for best of breed results</Typography>
+            <Typography>Real world human expert combines knowledge + AI for best possible recommendations</Typography>
           </Paper>
         </TimelineContent>
       </TimelineItem>
@@ -117,7 +117,7 @@ export default function CustomizedTimeline() {
       <TimelineItem>
         <TimelineOppositeContent>
           <Typography variant="body2" color="textSecondary">
-            Before you know..
+            Before you know it..
           </Typography>
         </TimelineOppositeContent>
         <TimelineSeparator>
@@ -130,7 +130,7 @@ export default function CustomizedTimeline() {
             <Typography variant="h6" component="h1">
               New Job
             </Typography>
-            <Typography>Realize a new job, career, better work life balance, money, and satisfaction!</Typography>
+            <Typography>Start a new job, career, better work life balance, salary, and enjoy!</Typography>
           </Paper>
         </TimelineContent>
       </TimelineItem>

@@ -1,5 +1,7 @@
 import React, {useState} from "react";
 import AWS from 'aws-sdk'
+import { Button } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
 function Upload() {
   const fileInput = React.useRef();
@@ -50,33 +52,56 @@ function Upload() {
   // for react-aws-s3 lib
   const handleClick = (event) => {
     event.preventDefault();
-    let newArr = fileInput.current.files;
-    for (let i = 0; i < newArr.length; i++) {
-      handleUpload(newArr[i]);
-    }
+//    let newArr = fileInput.current.files;  // event.target.files[0];
+    let file = event.target.files[0];
+    console.log('upload: '+file);
+    handleUpload(file);
   };
 
   const handleUpload = (file) => {
     console.log(file)
     uploadFile(file);
   };
+
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      '& > *': {
+        margin: theme.spacing(1),
+      },
+    },
+    input: {
+      display: 'none',
+    },
+  }));
+  
+  const classes = useStyles();
+
   return (
-    <>
-      <form className='upload-steps' onSubmit={handleClick}>
-        <label>
-          Upload file:
-          <input type='file' multiple ref={fileInput} />
-        </label>
-        <br />
-        <button type='submit'>Upload</button>
-      </form>
-      {uploaded 
-      ?
-      <b>Upload Complete!</b>
-      :
-      <i>Pending Upload</i>
-      }
-    </>
+        <div className={classes.root}>
+            <center>
+            <form className='upload-steps' onSubmit={handleClick}>
+                <input
+                    accept="image/*"
+                    id="xxxx"
+                    multiple
+                    className={classes.input}
+                    type="file"
+                    onChange={handleClick}
+                />
+                <label htmlFor="xxxx">
+                    <Button variant="contained" color="primary" component="span">
+                    Upload Resume
+                    </Button>
+                </label>
+            </form>
+            {uploaded 
+            ?
+            <b> &nbsp; Upload Complete!</b>
+            :
+            <i> &nbsp; </i>
+            }
+            </center>
+        </div>
   );
 }
 export default Upload;

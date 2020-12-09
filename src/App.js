@@ -220,10 +220,11 @@ export default function FooStack() {
                 <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
                   evolve.foostack.ai
                 </Typography>
-                <Typography variant="h5" align="center" color="textSecondary" paragraph>
-                 Evolve is a non profit that focuses on helping people become the best they can,
-                 starting with helping them find new career opportunties by way of:  Resume review and advice,
-                 target focus on companies and roles, interview strategy, interview prep and negotiation tips.
+                <Typography variant="h6" align="center" color="textSecondary" paragraph>
+                 Evolve is a non profit that focuses on helping people improve their career and job search.  
+                 Our cutting edge system confidentially reviews resumes and offers AI expert 
+                 + human expert advice, followed by human assistance to targeting   
+                 roles, and provide interview strategy, prep and negotiation tips.
                 </Typography>
 
                 <Typography variant="h4" align="center" gutterBottom>
@@ -233,6 +234,9 @@ export default function FooStack() {
               </Container>
             </div>
             <div>
+              <Typography variant="h4" align="center" gutterBottom>
+                  Get Started !
+              </Typography>
               <Upload />
             </div>
           </main>   
