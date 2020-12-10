@@ -2,10 +2,36 @@ import React, {useState} from "react";
 import AWS from 'aws-sdk'
 import { Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
 
 function Upload() {
-  const fileInput = React.useRef();
   const [uploaded, setUploaded] = useState(0);
+  const [open, setOpen] = React.useState(false);
+
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      '& > *': {
+        margin: theme.spacing(1),
+      },
+    },
+    input: {
+      display: 'none',
+    },
+    modal: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    paper: {
+      backgroundColor: theme.palette.background.paper,
+      border: '2px solid #000',
+      boxShadow: theme.shadows[5],
+      padding: theme.spacing(2, 4, 3),
+    },
+  }));
+  const classes = useStyles();
 
   const config = {
     bucketName: process.env.REACT_APP_BUCKET_NAME,
@@ -26,6 +52,10 @@ function Upload() {
     region: config.region,
   })
 
+  const triggerFlow = () => {
+    console.log('triggering next step');
+  }
+
   const uploadFile = (file) => {
     const params = {
       ACL: 'public-read',
@@ -36,7 +66,8 @@ function Upload() {
     myBucket.putObject(params)
       .on('httpUploadProgress', (evt) => {
         setUploaded(true);
-        console.log('putted?');
+        console.log('putted in S3');
+        triggerFlow();
       })
       .send((err) => {
          if (err) {
@@ -52,56 +83,71 @@ function Upload() {
   // for react-aws-s3 lib
   const handleClick = (event) => {
     event.preventDefault();
-//    let newArr = fileInput.current.files;  // event.target.files[0];
     let file = event.target.files[0];
     console.log('upload: '+file);
-    handleUpload(file);
-  };
-
-  const handleUpload = (file) => {
-    console.log(file)
     uploadFile(file);
+    handleOpen();
+  };
+  
+  const handleOpen = () => {
+    setOpen(true);
   };
 
-  const useStyles = makeStyles((theme) => ({
-    root: {
-      '& > *': {
-        margin: theme.spacing(1),
-      },
-    },
-    input: {
-      display: 'none',
-    },
-  }));
-  
-  const classes = useStyles();
+  const handleClose = () => {
+    setOpen(false);
+  };
+
 
   return (
-        <div className={classes.root}>
-            <center>
-            <form className='upload-steps' onSubmit={handleClick}>
-                <input
-                    accept="image/*"
-                    id="xxxx"
-                    multiple
-                    className={classes.input}
-                    type="file"
-                    onChange={handleClick}
-                />
-                <label htmlFor="xxxx">
-                    <Button variant="contained" color="primary" component="span">
-                    Upload Resume
-                    </Button>
-                </label>
-            </form>
-            {uploaded 
-            ?
-            <b> &nbsp; Upload Complete!</b>
-            :
-            <i> &nbsp; </i>
-            }
-            </center>
+    <div className={classes.root}>
+        <center>
+        <form className='upload-steps' onSubmit={handleClick}>
+            <input
+              // accept=".pdf,.doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document/*"
+                id="uploadFormId"
+                multiple
+                className={classes.input}
+                type="file"
+                onChange={handleClick}
+            />
+            <label htmlFor="uploadFormId">
+                <Button variant="contained" color="primary" component="span">
+                Upload Resume
+                </Button>
+            </label>
+        </form>
+        {uploaded 
+        ?
+        <b> &nbsp; Upload Complete!</b>
+        :
+        <i> &nbsp; </i>
+        }
+        <div>
+          {/* <button type="button" onClick={handleOpen}>
+            react-transition-group
+          </button> */}
+          <Modal
+            aria-labelledby="transition-modal-title"
+            aria-describedby="transition-modal-description"
+            className={classes.modal}
+            open={open}
+            onClose={handleClose}
+            closeAfterTransition
+            BackdropComponent={Backdrop}
+            BackdropProps={{
+              timeout: 500,
+            }}
+          >
+            <Fade in={open}>
+              <div className={classes.paper}>
+                <h2 id="transition-modal-title">Resume Processing</h2>
+                <p id="transition-modal-description">Your file is being processed...</p>
+              </div>
+            </Fade>
+          </Modal>
         </div>
+      </center>
+    </div>
   );
 }
 export default Upload;
