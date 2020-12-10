@@ -7,6 +7,7 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import { Transition } from 'react-transition-group';
 import anime from 'animejs';
+import SwipeableTextMobileStepper from './Stepper';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -170,7 +171,7 @@ function Upload() {
               <h2 id="transition-modal-title">Resume Accepted!</h2>
               <p id="transition-modal-description">Your resume is loading please wait while it processes</p>
               <p id="transition-modal-description">AI analysis phase is next... !</p>
-              <ProgressWindow/>
+              <SwipeableTextMobileStepper/>
             </div>
             </Fade>
           </Modal>
