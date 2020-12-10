@@ -8,11 +8,39 @@ import Fade from '@material-ui/core/Fade';
 import { Transition } from 'react-transition-group';
 import anime from 'animejs';
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    '& > *': {
+      margin: theme.spacing(1),
+    },
+  },
+  input: {
+    display: 'none',
+  },
+  modal: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  paper: {
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
+  el: {
+    height: '16px',
+    width: '16px',
+    backgroundColor: 'green',
+  },
+}));
+
 function ProgressWindow() {
+  const classes = useStyles();
   const animationRef = React.useRef(null);
   React.useEffect(() => {
     animationRef.current = anime({
-      targets: ".el",
+      targets: '.el',
       translateX: 250,
       delay: function(el, i) {
         return i * 100;
@@ -23,9 +51,9 @@ function ProgressWindow() {
     });
   }, []);
   return (
-    <div className="App">
-      <div className="el">
-        Something
+    <div className={classes.el}>
+      <div className='el'>
+        Thinking...
       </div>
     </div>
   );
@@ -35,37 +63,6 @@ function Upload() {
   const [uploaded, setUploaded] = useState(0);
   const [phase1, setPhase1] = React.useState(false);
   const [open, setOpen] = React.useState(false);
-
-  const useStyles = makeStyles((theme) => ({
-    root: {
-      '& > *': {
-        margin: theme.spacing(1),
-      },
-    },
-    input: {
-      display: 'none',
-    },
-    dialogPaper: {
-      minHeight: '80vh',
-      maxHeight: '80vh',
-    },
-    modal: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    paper: {
-      backgroundColor: theme.palette.background.paper,
-      border: '2px solid #000',
-      boxShadow: theme.shadows[5],
-      padding: theme.spacing(2, 4, 3),
-    },
-    el: {
-      height: '16px',
-      width: '16px',
-      backgroundColor: 'green',
-    },
-  }));
   const classes = useStyles();
 
   const config = {
@@ -160,6 +157,7 @@ function Upload() {
             aria-describedby="transition-modal-description"
             className={classes.modal}
             open={open}
+            maxWidth='md'
             onClose={handleClose}
             closeAfterTransition
             BackdropComponent={Backdrop}
@@ -168,9 +166,12 @@ function Upload() {
             }}
           >
             <Fade in={open}>
-              <div className={classes.paper}>
-                 <ProgressWindow/>
-              </div>
+            <div className={classes.paper}>
+              <h2 id="transition-modal-title">Resume Accepted!</h2>
+              <p id="transition-modal-description">Your resume is loading please wait while it processes</p>
+              <p id="transition-modal-description">AI analysis phase is next... !</p>
+              <ProgressWindow/>
+            </div>
             </Fade>
           </Modal>
         </div>
