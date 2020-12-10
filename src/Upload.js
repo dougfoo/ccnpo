@@ -5,9 +5,35 @@ import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
+import { Transition } from 'react-transition-group';
+import anime from 'animejs';
+
+function ProgressWindow() {
+  const animationRef = React.useRef(null);
+  React.useEffect(() => {
+    animationRef.current = anime({
+      targets: ".el",
+      translateX: 250,
+      delay: function(el, i) {
+        return i * 100;
+      },
+      loop: true,
+      direction: "alternate",
+      easing: "easeInOutSine"
+    });
+  }, []);
+  return (
+    <div className="App">
+      <div className="el">
+        Something
+      </div>
+    </div>
+  );
+}
 
 function Upload() {
   const [uploaded, setUploaded] = useState(0);
+  const [phase1, setPhase1] = React.useState(false);
   const [open, setOpen] = React.useState(false);
 
   const useStyles = makeStyles((theme) => ({
@@ -19,6 +45,10 @@ function Upload() {
     input: {
       display: 'none',
     },
+    dialogPaper: {
+      minHeight: '80vh',
+      maxHeight: '80vh',
+    },
     modal: {
       display: 'flex',
       alignItems: 'center',
@@ -29,6 +59,11 @@ function Upload() {
       border: '2px solid #000',
       boxShadow: theme.shadows[5],
       padding: theme.spacing(2, 4, 3),
+    },
+    el: {
+      height: '16px',
+      width: '16px',
+      backgroundColor: 'green',
     },
   }));
   const classes = useStyles();
@@ -52,10 +87,6 @@ function Upload() {
     region: config.region,
   })
 
-  const triggerFlow = () => {
-    console.log('triggering next step');
-  }
-
   const uploadFile = (file) => {
     const params = {
       ACL: 'public-read',
@@ -67,7 +98,6 @@ function Upload() {
       .on('httpUploadProgress', (evt) => {
         setUploaded(true);
         console.log('putted in S3');
-        triggerFlow();
       })
       .send((err) => {
          if (err) {
@@ -97,7 +127,6 @@ function Upload() {
     setOpen(false);
   };
 
-
   return (
     <div className={classes.root}>
         <center>
@@ -123,9 +152,9 @@ function Upload() {
         <i> &nbsp; </i>
         }
         <div>
-          {/* <button type="button" onClick={handleOpen}>
-            react-transition-group
-          </button> */}
+          <button type="button" onClick={handleOpen}>
+            test Button modal
+          </button>
           <Modal
             aria-labelledby="transition-modal-title"
             aria-describedby="transition-modal-description"
@@ -140,8 +169,7 @@ function Upload() {
           >
             <Fade in={open}>
               <div className={classes.paper}>
-                <h2 id="transition-modal-title">Resume Processing</h2>
-                <p id="transition-modal-description">Your file is being processed...</p>
+                 <ProgressWindow/>
               </div>
             </Fade>
           </Modal>
