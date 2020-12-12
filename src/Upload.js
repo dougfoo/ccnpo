@@ -151,7 +151,7 @@ function Upload() {
         }
         <div>
           <button type="button" onClick={handleOpen}>
-            test Button modal
+           test button (don't click)
           </button>
           <Modal
             aria-labelledby="transition-modal-title"
@@ -168,9 +168,8 @@ function Upload() {
           >
             <Fade in={open}>
             <div className={classes.paper}>
-              <h2 id="transition-modal-title">Resume Accepted!</h2>
-              <p id="transition-modal-description">Your resume is loading please wait while it processes</p>
-              <p id="transition-modal-description">AI analysis phase is next... !</p>
+              <h3 id="transition-modal-title">Resume-AI Process!</h3>
+              <p id="transition-modal-description">AI workflow under way...</p>
               <SwipeableTextMobileStepper/>
             </div>
             </Fade>

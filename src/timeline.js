@@ -74,7 +74,7 @@ export default function CustomizedTimeline() {
       <TimelineItem>
         <TimelineOppositeContent>
           <Typography variant="body2" color="textSecondary">
-            Also Instant
+            Semi-Instantly
           </Typography>
         </TimelineOppositeContent>
         <TimelineSeparator>
@@ -95,7 +95,7 @@ export default function CustomizedTimeline() {
       <TimelineItem>
         <TimelineOppositeContent>
           <Typography variant="body2" color="textSecondary">
-            Schedule via Zoom with a human
+            Schedule Zoom with a human
           </Typography>
         </TimelineOppositeContent>
         <TimelineSeparator>
@@ -117,7 +117,7 @@ export default function CustomizedTimeline() {
       <TimelineItem>
         <TimelineOppositeContent>
           <Typography variant="body2" color="textSecondary">
-            Before you know it..
+            Soon after.. 
           </Typography>
         </TimelineOppositeContent>
         <TimelineSeparator>

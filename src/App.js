@@ -21,7 +21,7 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="/about/">
+      <Link color="inherit" href="http://foostack.ai">
         foostack.ai
       </Link>{' '}
       {new Date().getFullYear()}
@@ -113,8 +113,6 @@ const useStyles = makeStyles(theme => ({
 export default function FooStack() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-  const dialogHeader = "Contact Placeholder";
-  const dialogBody = "Placeholder for Contact Form w/ Captcha";
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -130,12 +128,12 @@ export default function FooStack() {
       <CssBaseline />
       <AppBar position="relative">
         <Toolbar>
-          <ThreeSixtyIcon className={classes.icon} onClick={() => { document.location.href = '/'; }}>
+          <ThreeSixtyIcon className={classes.icon} onClick={() => { document.location.href = 'http://foostack.ai'; }}>
           </ThreeSixtyIcon>
-          <Link variant="h6" className={classes.title} color="inherit" href="/">
+          <Link variant="h6" className={classes.title} color="inherit" href="http://foostack.ai">
             Foostack.Ai
           </Link>
-          <Button color="inherit" onClick={handleClickOpen}>Contact</Button>
+          <Button color="inherit" onClick={handleClickOpen}>How it works</Button>
         </Toolbar>
       </AppBar>
       <Dialog
@@ -152,18 +150,29 @@ export default function FooStack() {
           },
         }}
       >
-        <DialogTitle id="alert-dialog-title">{dialogHeader}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">So how does it really work?</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            {dialogBody}
+           We use an advanced AI engine leveraging NLP and years of industry expertise.
+           It follows a 5 step process
+           <ul>
+            <li>Load and parse resume - structured PDF, MSWord, RTF only for now</li>
+            <li>Feature extract - using Deep Learning NLP to extract semantic details</li>
+            <li>Visual layout analysis - using Deep Learning Vision to analyze look and feel</li>
+            <li>Scorecard of 12 dimensions of resume effectiveness</li>
+            <li>Recommendations and next steps</li>
+            </ul>
+           Behind the scenes we run on AWS leveraging their S3, Glue, Lambda, and SageMaker along
+           with custom built Python libraries for NLP pre and post processing, reporting, and analysis.
+
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
-            Send
+            Like
           </Button>
           <Button onClick={handleClose} color="primary" autoFocus>
-            Cancel
+            Close
           </Button>
         </DialogActions>
       </Dialog>
@@ -182,7 +191,7 @@ export default function FooStack() {
               </Typography>
 
               <Typography variant="h4" align="center" gutterBottom>
-                  How it works
+                  Try it (in Beta!)
               </Typography>
               <CustomizedTimeline/>
             </Container>
@@ -198,10 +207,10 @@ export default function FooStack() {
       {/* Footer */}
       <footer className={classes.footer}>
         <Typography variant="h6" align="center" gutterBottom>
-        FooStack         
+        Resume-Ai         
         </Typography>
         <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-          FooStack AI, architecture and design
+          By FooStack.AI, architecture and design
         </Typography>
         <Copyright />
       </footer>
