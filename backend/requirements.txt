@@ -1,0 +1,22 @@
+certifi==2020.11.8
+joblib @ file:///tmp/build/80754af9/joblib_1601912903842/work
+mkl-fft==1.2.0
+mkl-random==1.1.1
+mkl-service==2.3.0
+numpy==1.19.4
+scikit-learn==0.22.1
+scipy @ file:///opt/concourse/worker/volumes/live/851446f6-a052-41c4-4243-67bb78999b49/volume/scipy_1604596178167/work
+six @ file:///opt/concourse/worker/volumes/live/5b31cb27-1e37-4ca5-6e9f-86246eb206d2/volume/six_1605205320872/work
+asgiref==3.3.1
+certifi==2020.11.8
+Django==3.1.4
+joblib @ file:///tmp/build/80754af9/joblib_1601912903842/work
+mkl-fft==1.2.0
+mkl-random==1.1.1
+mkl-service==2.3.0
+numpy==1.19.4
+pytz==2020.4
+scikit-learn==0.22.1
+scipy @ file:///opt/concourse/worker/volumes/live/851446f6-a052-41c4-4243-67bb78999b49/volume/scipy_1604596178167/work
+six @ file:///opt/concourse/worker/volumes/live/5b31cb27-1e37-4ca5-6e9f-86246eb206d2/volume/six_1605205320872/work
+sqlparse==0.4.1
