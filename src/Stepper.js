@@ -15,7 +15,7 @@ import SwipeableViews from 'react-swipeable-views';
 
 const tutorialSteps = [
   {
-    label: 'Uploaded resume - Done blah albh albha blah bl one blah albh albha blah bl one blah albh albha blah bl one blah albh albha blah bl',
+    label: 'Uploaded resume -- we are on our way!',
     imgPath:
       'https://images.unsplash.com/photo-1537944434965-cf4679d1a598?auto=format&fit=crop&w=400&h=250&q=60',
   },
