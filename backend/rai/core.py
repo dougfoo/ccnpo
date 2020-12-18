@@ -32,4 +32,5 @@ class User(object):
     def __repr__(self):
         return f'User obj for {self.id}'
 
-print('foo')
+def foo():
+    return 'foo'
