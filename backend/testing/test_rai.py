@@ -40,10 +40,10 @@ def test_find():
     pos = n.find(8)
     assert (pos == -1)
 
-# def test_delete():
-#     n = setup2()
-#     n.delete(2)
-#     assert(n.find(2) == -1)
+def test_delete():
+    n = setup2()
+    n.delete(2)
+    assert(n.find(2) == -1)
 
 # 6,1,5,7,2,4,3 ->
 #      6

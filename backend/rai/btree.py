@@ -75,12 +75,35 @@ class Node(object):
             else:
                 return self.right.findNode(key)
 
+    def findParentNode(self, key):
+        if ((self.left != None and self.left.node == key) or (self.right != None and self.right.node == key)):
+            return self
+        elif (self.left == None and self.right == None):
+            return None
+        elif (key < self.node):
+            return self.left.findParentNode(key)
+        else:
+            return self.right.findParentNode(key)
+
     def delete(self, key):
-        n = self.find(key)
+        n = self.findParentNode(key)
         if (n == None):
             return -1
         else:
-           pass
+            if (key == n.left.node):
+                if (n.left.left != None):
+                    tmp_right = n.left.right
+                    n.left = n.left.left
+                    n.left.right = tmp_right
+                else:
+                    n.left = n.left.right
+            else:
+                if (n.right.left != None):
+                    tmp_right = n.right.right
+                    n.righ = n.right.left
+                    n.right.right = tmp_right
+                else:
+                    n.right = n.right.right
     #     4
     #  2   5
     # 1 3   6 
