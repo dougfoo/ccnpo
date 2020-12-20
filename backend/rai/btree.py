@@ -3,17 +3,20 @@
 # bfs
 import collections
 
-def printPretty(root):
-    if (root == None):
-        return
-    # print(root.node, end='')
-    if (root.left):
-        print(root.left.node, end='')
-    if (root.right):
-        print(f' {root.right.node}', end='')
-    print('\n', end='')
-    printPretty(root.left)
-    printPretty(root.right)
+def printPretty(r):
+    def _printPretty(root):
+        if (root == None):
+            return
+        # print(root.node, end='')
+        if (root.left):
+            print(root.left.node, end='')
+        if (root.right):
+            print(f' {root.right.node}', end='')
+        print('\n', end='')
+        _printPretty(root.left)
+        _printPretty(root.right)
+    print(r.node)
+    _printPretty(r)
 
 def printInOrder(root):
     if (root.left):
@@ -29,6 +32,36 @@ def printPreOrder(root):
     if (root.right):
         printPreOrder(root.right)
 
+def depth(root):
+    if (root is None):
+        return 0
+    else:
+        return max(depth(root.left), depth(root.right)) +1
+
+def rotateLeft(root):
+    tmp_root = root.left
+    tmp_right = tmp_root.right
+    root.left = None
+    tmp_root.right = root
+    if (tmp_right != None):
+        tmp_root.insert(tmp_right)
+    return tmp_root
+
+def rotateRight(root):
+    tmp_root = root.left
+    tmp_right = tmp_root.right
+    root.left = None
+    tmp_root.right = root
+    if (tmp_right != None):
+        tmp_root.insert(tmp_right)
+    return tmp_root
+#      3          2      
+#    2      ->   1  3
+#   1
+
+def rotateRight2(self, root): # double right, ie, left-right
+    pass
+
 def printPostOrder(root):
     if (root.left):
         printPostOrder(root.left)
@@ -41,6 +74,9 @@ class Node(object):
         self.node=node
         self.left=left
         self.right=right
+
+    def __repr__(self):
+        return 'Node: '+str(self.node)
 
     def insert(self, node):
         if (node.node <= self.node):
@@ -87,10 +123,11 @@ class Node(object):
 
     def delete(self, key):
         n = self.findParentNode(key)
+        print('found parent:' + str(n))
         if (n == None):
             return -1
         else:
-            if (key == n.left.node):
+            if (n.left != None and key == n.left.node):
                 if (n.left.left != None):
                     tmp_right = n.left.right
                     n.left = n.left.left
@@ -100,7 +137,7 @@ class Node(object):
             else:
                 if (n.right.left != None):
                     tmp_right = n.right.right
-                    n.righ = n.right.left
+                    n.right = n.right.left
                     n.right.right = tmp_right
                 else:
                     n.right = n.right.right
@@ -128,8 +165,16 @@ class Node(object):
     #  to             to 
     #   2              2 
     #  1  3          1   3
-    # how to do this... ?? key is equal l/r at least sub (or just at top
-    # is the most important for median calc)
+    # rule for rotation:
+    #   if left heavy:
+    #      if left.left heavy:
+    #          rotate right
+    #      else: rotate left-right
+    #   else:
+    #      if right.right heavy:
+    #          rotate left
+    #      else: rotate right-left
+
 
 n = Node(6,None, None)
 n.insert(Node(1,None,None))
@@ -154,6 +199,32 @@ printPreOrder(n)
 print('postorder')
 printPostOrder(n)
 print('pretty')
-print(n.node)
 printPretty(n)
 
+print('delete 4')
+n.delete(4)
+printPretty(n)
+
+
+n = Node(3,None, None)
+n.insert(Node(2,None,None))
+n.insert(Node(1,None,None))
+
+print('original')
+printPretty(n)
+n2 = rotateRight(n)
+print('rotateRight')
+printPretty(n2)
+
+n = Node(6,None, None)
+n.insert(Node(1,None,None))
+n.insert(Node(5,None,None))
+n.insert(Node(7,None,None))
+n.insert(Node(2,None,None))
+n.insert(Node(4,None,None))
+n.insert(Node(3,None,None))
+print('original2')
+printPretty(n)
+n2 = rotateRight(n)
+print('rotateRight')
+printPretty(n2)
