@@ -1,5 +1,5 @@
 
-from rai.btree import Node, rotateRight
+from rai.btree import *
 
 def test_create():
     n = Node(1)
@@ -23,6 +23,13 @@ def setup():
     n.insert(Node(4,None,None))
     n.insert(Node(3,None,None))
     return n
+# 6,1,5,7,2,4,3 ->
+#      6
+#   1    7
+#     5
+#   2    
+#     4
+#   3
 
 def setup2():
     n = Node(4,None, None)
@@ -53,19 +60,17 @@ def test_depth():
     n = setup()
     assert(depth(n) == 6)
     assert(depth(setup2()) == 3)
-# 6,1,5,7,2,4,3 ->
-#      6
-#   1    7
-#     5
-#   2    
-#     4
-#   3
 
-def setup321():
-    n = Node(3,None, None)
-    n.insert(Node(2,None,None))
-    n.insert(Node(1,None,None))
-    return n
-
-n = setup321()
-n.rotate
+def test_rotate():
+    n = setup2()
+    assert(depth(n.left) == 2)
+    assert(depth(n.right) == 2)
+    n = rotateLeft(n)
+    assert(depth(n.left) == 3)
+    assert(depth(n.right) == 1)
+    n = rotateRight(n)
+    assert(depth(n.left) == 2)
+    assert(depth(n.right) == 2)
+    n = rotateRight(n)
+    assert(depth(n.left) == 1)
+    assert(depth(n.right) == 3)

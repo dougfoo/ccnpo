@@ -39,15 +39,19 @@ def depth(root):
         return max(depth(root.left), depth(root.right)) +1
 
 def rotateLeft(root):
-    tmp_root = root.left
-    tmp_right = tmp_root.right
-    root.left = None
-    tmp_root.right = root
-    if (tmp_right != None):
-        tmp_root.insert(tmp_right)
+    if (root.right is None):
+        return root
+    tmp_root = root.right
+    tmp_left = tmp_root.left
+    root.right = None
+    tmp_root.left = root
+    if (tmp_left != None):
+        tmp_root.insert(tmp_left)
     return tmp_root
 
 def rotateRight(root):
+    if (root.left is None):
+        return root
     tmp_root = root.left
     tmp_right = tmp_root.right
     root.left = None
@@ -225,6 +229,9 @@ n.insert(Node(4,None,None))
 n.insert(Node(3,None,None))
 print('original2')
 printPretty(n)
-n2 = rotateRight(n)
+n = rotateRight(n)
 print('rotateRight')
-printPretty(n2)
+printPretty(n)
+n = rotateLeft(n)
+print('rotateLeft')
+printPretty(n)
