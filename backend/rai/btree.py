@@ -63,8 +63,15 @@ def rotateRight(root):
 #    2      ->   1  3
 #   1
 
-def rotateRight2(self, root): # double right, ie, left-right
-    pass
+def rotateLeft2(root): # double right, ie, left-right    
+    r = rotateRight(root.right)
+    root.right = r
+    return rotateLeft(root)
+
+def rotateRight2(root): # double right, ie, left-right    
+    r = rotateLeft(root.left)
+    root.left = r
+    return rotateRight(root)
 
 def printPostOrder(root):
     if (root.left):
@@ -235,3 +242,12 @@ printPretty(n)
 n = rotateLeft(n)
 print('rotateLeft')
 printPretty(n)
+
+n = Node(3,None, None)
+n.insert(Node(1,None,None))
+n.insert(Node(2,None,None))
+
+print('original')
+printPretty(n)
+print('double-right')
+printPretty(rotateRight2(n))
