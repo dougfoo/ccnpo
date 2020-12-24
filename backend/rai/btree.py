@@ -12,7 +12,8 @@ def printPretty(r):
             print(root.left.node, end='')
         if (root.right):
             print(f' {root.right.node}', end='')
-        print('\n', end='')
+        if (root.left or root.right):
+            print('\n', end='')
         _printPretty(root.left)
         _printPretty(root.right)
     print(r.node)
@@ -32,6 +33,21 @@ def printPreOrder(root):
     if (root.right):
         printPreOrder(root.right)
 
+def insert(root, node):
+    if (node.node <= root.node):
+        if (root.left is None):
+            root.left = node
+        else:
+            insert(root.left, node)
+            root.left = Node.balance(root.left)
+    else:
+        if (root.right is None):
+            root.right = node
+        else:
+            insert(root.right, node)
+            root.right = Node.balance(root.right)
+    return root
+
 def depth(root):
     if (root is None):
         return 0
@@ -46,7 +62,7 @@ def rotateLeft(root):
     root.right = None
     tmp_root.left = root
     if (tmp_left != None):
-        tmp_root.insert(tmp_left)
+        Node.insert(tmp_root, tmp_left)
     return tmp_root
 
 def rotateRight(root):
@@ -57,7 +73,7 @@ def rotateRight(root):
     root.left = None
     tmp_root.right = root
     if (tmp_right != None):
-        tmp_root.insert(tmp_right)
+        Node.insert(tmp_root, tmp_right)
     return tmp_root
 #      3          2      
 #    2      ->   1  3
@@ -89,18 +105,6 @@ class Node(object):
     def __repr__(self):
         return 'Node: '+str(self.node)
 
-    def insert(self, node):
-        if (node.node <= self.node):
-            if (self.left is None):
-                self.left = node
-            else:
-                self.left.insert(node)
-        else:
-            if (self.right is None):
-                self.right = node
-            else:
-                self.right.insert(node)
-
     def find(self, key):
         n = self.findNode(key)
         if (n == None):
@@ -131,6 +135,16 @@ class Node(object):
             return self.left.findParentNode(key)
         else:
             return self.right.findParentNode(key)
+
+    def depth(self):
+        if (self is None):
+            return 0
+        elif (self.left is None):
+            return depth(self.right) +1
+        elif (self.right is None):
+            return depth(self.left) +1
+        else: 
+            return max(depth(self.left), depth(self.right)) +1
 
     def delete(self, key):
         n = self.findParentNode(key)
@@ -167,8 +181,63 @@ class Node(object):
     # the deleted w/ one subchild if exists is all we need to do
     # as subchildren still honor tree rule
 
-    def balance(self):
-        pass
+    @staticmethod
+    def insert(root, node):
+        return insert(root, node)
+        # return Node._insert(root, node)
+        # tmp = Node.balance(tmp)  # returns shifted self
+        # print('balance?')
+        # printPretty(tmp)
+        # return tmp
+
+    @staticmethod 
+    def balance(root):
+        lh = depth(root.left)
+        rh = depth(root.right)
+        if (abs(lh-rh) > 1):
+            if (lh > rh):
+                l = depth(root.left.left)
+                r = depth(root.left.right)
+                if (r > l):
+                    return rotateRight2(root)
+                else:
+                    return rotateRight(root)
+            else:
+                l = depth(root.right.left)
+                r = depth(root.right.right)
+                if (l > r):
+                    return rotateLeft2(root)
+                else:
+                    return rotateLeft(root)
+        else:
+            return root
+
+print('123456')
+n = Node(1,None, None)
+n.insert(n, Node(2,None,None))
+n.insert(n, Node(3,None,None))
+n.insert(n, Node(4,None,None))
+n.insert(n, Node(5,None,None))
+n.insert(n, Node(6,None,None))
+n.insert(n, Node(7,None,None))
+n.insert(n, Node(8,None,None))
+n.insert(n, Node(9,None,None))
+printPretty(n)
+print('depth123', depth(n.left), depth(n.right))
+print('r depth123', depth(n.right.left), depth(n.right.right))
+
+n = n.balance(n)
+printPretty(n)
+print('b depth123', depth(n.left), depth(n.right))
+print('b r depth123', depth(n.right.left), depth(n.right.right))
+
+# Node.insert(n, Node(0,None,None))
+# printPretty(n)
+# print('depth3210',depth(n.left),depth(n.right))
+# n = Node.balance(n)
+# printPretty(n) 
+# print('depth3210',depth(n.left),depth(n.right))
+
     # rebalance tree from :
     #   1              2
     #     2               3
@@ -187,67 +256,110 @@ class Node(object):
     #      else: rotate right-left
 
 
+# n = Node(6,None, None)
+# n.insert(Node(1,None,None))
+# n.insert(Node(5,None,None))
+# n.insert(Node(7,None,None))
+# n.insert(Node(2,None,None))
+# n.insert(Node(4,None,None))
+# n.insert(Node(3,None,None))
+
+# # 6,1,5,7,2,4,3 ->
+# #      6
+# #   1    7
+# #     5
+# #   2    
+# #     4
+# #   3
+
+# print('inorder')
+# printInOrder(n)
+# print('preorder')
+# printPreOrder(n)
+# print('postorder')
+# printPostOrder(n)
+# print('pretty')
+# printPretty(n)
+
+# print('delete 4')
+# n.delete(4)
+# printPretty(n)
+
+
+# n = Node(3,None, None)
+# n.insert(Node(2,None,None))
+# n.insert(Node(1,None,None))
+
+# print('original')
+# printPretty(n)
+# n2 = rotateRight(n)
+# print('rotateRight')
+# printPretty(n2)
+
+# n = Node(6,None, None)
+# n.insert(Node(1,None,None))
+# n.insert(Node(5,None,None))
+# n.insert(Node(7,None,None))
+# n.insert(Node(2,None,None))
+# n.insert(Node(4,None,None))
+# n.insert(Node(3,None,None))
+# print('original2')
+# printPretty(n)
+# n = rotateRight(n)
+# print('rotateRight')
+# printPretty(n)
+# n = rotateLeft(n)
+# print('rotateLeft')
+# printPretty(n)
+
+# n = Node(3,None, None)
+# n.insert(Node(1,None,None))
+# n.insert(Node(2,None,None))
+
+# print('original')
+# printPretty(n)
+# print('double-right')
+# printPretty(rotateRight2(n))
+
+# print('balancing left')
+# n = Node(3,None, None)
+# n.insert(Node(2,None,None))
+# n.insert(Node(1,None,None))
+# printPretty(n)
+
+# print('balancing left-right nest')
+# n = Node(3,None, None)
+# n.insert(Node(1,None,None))
+# n.insert(Node(2,None,None))
+# printPretty(n)
+
+# n = Node(6,None, None)
+# n.insert(Node(1,None,None))
+# n.insert(Node(5,None,None))
+# printPretty(n)
+# n.insert(Node(7,None,None))
+# printPretty(n)
+# n.insert(Node(2,None,None))
+# print('before 4')
+# printPretty(n)
+# n.insert(Node(4,None,None))
+# print('after 4')
+# printPretty(n)
+# # n.insert(Node(3,None,None))
+# # n = Node.balance(n)
+# # printPretty(n)
+
+# print(depth(n.left),depth(n.right))
+
 n = Node(6,None, None)
-n.insert(Node(1,None,None))
-n.insert(Node(5,None,None))
-n.insert(Node(7,None,None))
-n.insert(Node(2,None,None))
-n.insert(Node(4,None,None))
-n.insert(Node(3,None,None))
-
-# 6,1,5,7,2,4,3 ->
-#      6
-#   1    7
-#     5
-#   2    
-#     4
-#   3
-
-print('inorder')
-printInOrder(n)
-print('preorder')
-printPreOrder(n)
-print('postorder')
-printPostOrder(n)
-print('pretty')
+n.insert(n, Node(1,None,None))
+n.insert(n, Node(5,None,None))
+n.insert(n, Node(7,None,None))
+n.insert(n, Node(2,None,None))
+n.insert(n, Node(4,None,None))
+n.insert(n, Node(3,None,None))
+n = Node.balance(n)
+print('6157243')
 printPretty(n)
+print('depth',depth(n.left),depth(n.right))
 
-print('delete 4')
-n.delete(4)
-printPretty(n)
-
-
-n = Node(3,None, None)
-n.insert(Node(2,None,None))
-n.insert(Node(1,None,None))
-
-print('original')
-printPretty(n)
-n2 = rotateRight(n)
-print('rotateRight')
-printPretty(n2)
-
-n = Node(6,None, None)
-n.insert(Node(1,None,None))
-n.insert(Node(5,None,None))
-n.insert(Node(7,None,None))
-n.insert(Node(2,None,None))
-n.insert(Node(4,None,None))
-n.insert(Node(3,None,None))
-print('original2')
-printPretty(n)
-n = rotateRight(n)
-print('rotateRight')
-printPretty(n)
-n = rotateLeft(n)
-print('rotateLeft')
-printPretty(n)
-
-n = Node(3,None, None)
-n.insert(Node(1,None,None))
-n.insert(Node(2,None,None))
-
-print('original')
-printPretty(n)
-print('double-right')
-printPretty(rotateRight2(n))
