@@ -4,20 +4,16 @@
 import collections
 
 def printPretty(r):
-    def _printPretty(root):
-        if (root == None):
-            return
-        # print(root.node, end='')
-        if (root.left):
-            print(root.left.node, end='')
-        if (root.right):
-            print(f' {root.right.node}', end='')
-        if (root.left or root.right):
-            print('\n', end='')
-        _printPretty(root.left)
-        _printPretty(root.right)
-    print(r.node)
-    _printPretty(r)
+    q = collections.deque()
+    q.append(r) 
+
+    while (len(q) > 0):
+        e = q.popleft()
+        print(e.node, end=" ")
+        if (e.left):
+            q.append(e.left)
+        if (e.right):
+            q.append(e.right)
 
 def printInOrder(root):
     if (root.left):
@@ -148,9 +144,8 @@ class Node(object):
 
     def delete(self, key):
         n = self.findParentNode(key)
-        print('found parent:' + str(n))
         if (n == None):
-            return -1
+            raise Exception(f'unable to find key: {key}') 
         else:
             if (n.left != None and key == n.left.node):
                 if (n.left.left != None):
@@ -352,14 +347,29 @@ print('b r depth123', depth(n.right.left), depth(n.right.right))
 # print(depth(n.left),depth(n.right))
 
 n = Node(6,None, None)
-n.insert(n, Node(1,None,None))
-n.insert(n, Node(5,None,None))
-n.insert(n, Node(7,None,None))
 n.insert(n, Node(2,None,None))
+n.insert(n, Node(8,None,None))
+n.insert(n, Node(9,None,None))
+n.insert(n, Node(1,None,None))
 n.insert(n, Node(4,None,None))
 n.insert(n, Node(3,None,None))
 n = Node.balance(n)
-print('6157243')
+print('6289143')
 printPretty(n)
 print('depth',depth(n.left),depth(n.right))
+
+# delete 1,3,2 ?  force rebal
+print('delete1')
+n.delete(9)
+printPretty(n)
+print('depth',depth(n.left),depth(n.right))
+n = Node.balance(n)
+printPretty(n)
+print('depth',depth(n.left),depth(n.right))
+# print('delete3')
+# n.delete(3)
+# printPretty(n)
+# print('delete2')
+# n.delete(2)
+# printPretty(n)
 
